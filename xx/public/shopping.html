@@ -1,0 +1,281 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./stylesheets/shopping.css">
+    <link rel="stylesheet" href="./stylesheets/swiper.min.css">
+   <script src="javascripts/axios.js"></script>
+   <script src="./javascripts/template-web.js"></script>
+   <script src="./javascripts/jquery3.3.1.js"></script>
+   <script src="./javascripts/shopping.js"></script>
+   <script src="./javascripts/axios.js"></script>
+</head>
+<body>
+    <script src="./javascripts/swiper-bundle.min.js"></script>
+    <div class="details-header">
+        <div class="back"></div>
+         <ul>
+             <li class="active">商品</li>
+             <li>详情</li>
+             <li>评价</li>
+         </ul>
+         <span></span>
+    </div>
+    <div class="page" >
+    <div class="main">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- <div class="swiper-slide"><img src="./images/home/index/banner_1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/home/index/banner_2.jpg" alt=""></div> -->
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>  
+    </div>
+   
+
+    </div>
+    <div class="good-main">
+        
+    </div>
+    <div class="reviews-main">
+        <div class="reviews-main">
+            <div class="reviews-title">
+                商品评价（66）
+            </div>
+            <div>
+                <div class="reviews-wrap">
+                    <!-- <div class="reviews-list">
+                       <ul>
+                           <li><img src="./images/home/index/banner_1.jpg" alt=""></li>
+                           <li>师弟是</li>
+                       </ul>
+                       <div class="reviews-name">时候是hi</div>
+                       <div class="reviews-date">2020-05-06</div>
+                    </div>
+                    <div class="reviews-list">
+                        <ul>
+                            <li><img src="./images/home/index/banner_1.jpg" alt=""></li>
+                            <li>师弟是</li>
+                        </ul>
+                        <div class="reviews-name">时候是hi</div>
+                        <div class="reviews-date">2020-05-06</div>
+                    </div> -->
+                 </div>
+                 <div class="reviews-more">
+                     查看更多评价
+                 </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="bottom-btn-wrap">
+        <div class="btn fav">收藏</div>
+        <div class="btn cart">加入购物车</div>
+    </div>
+    </div>
+    <div class="page" style="display: none;">
+        <div class="mains">
+        <!-- <div class="introduce">
+            111111111111
+        </div>
+        <div class="introduce">
+            111111111111
+        </div>
+        <div class="introduce">
+            <img src="./images/home/index/banner_1.jpg" alt="">
+        </div>
+        <div class="introduce">
+            <img src="./images/home/index/banner_1.jpg" alt="">
+        </div> -->
+    </div>
+    </div>
+    <div class="page" style="display: none;">
+        <div class="reviews-main">
+            <div class="reviews-main">
+                <div class="reviews-title">
+                    <!-- 商品评价（66） -->
+                </div>
+                <div>
+                    <div class="reviews-wrap">
+                        <!-- <div class="reviews-list">
+                           <ul>
+                               <li><img src="./images/home/index/banner_1.jpg" alt=""></li>
+                               <li>师弟是</li>
+                           </ul>
+                           <div class="reviews-name">时候是hi</div>
+                           <div class="reviews-date">2020-05-06</div>
+                        </div>
+                        <div class="reviews-list">
+                            <ul>
+                                <li><img src="./images/home/index/banner_1.jpg" alt=""></li>
+                                <li>师弟是</li>
+                            </ul>
+                            <div class="reviews-name">时候是hi</div>
+                            <div class="reviews-date">2020-05-06</div>
+                        </div> -->
+                     </div>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mask" style="display: none;"></div>
+    <div class="cart-panel ">
+      <div class="goods-info">
+        <div class="close-panel-wrap">
+            <div class="spot"></div>
+            <div class="line"></div>
+            <div class="close"></div>
+        </div>
+        <div class="goods-img"></div>
+      
+        <div class="goods-wrap">
+          <!-- <div class="goods-title">111111</div>
+          <div class="price">$257</div>
+          <div class="goods-code">商品编号：3121321321</div> -->
+        </div>
+        
+    
+    </div>
+    <div class="attr-wrap">
+        <div class="attr-list">
+            <div class="attr-name">
+            </div>
+            <div class="val-wrap" id="val-wrap1">
+                <!-- <span class="val">黑色</span>
+                <span class="val">白色</span> -->
+            </div>
+        </div>
+        <div class="attr-list">
+            <div class="attr-name">
+            </div>
+            <div class="val-wrap" id="val-wrap2">
+                <!-- <span class="val">M</span>
+                <span class="val">L</span> -->
+            </div>
+        </div>
+    </div>
+    <div class="amount-wrap">
+       <div class="amount-name">
+           购买数量
+       </div>
+       <div class="amount-input-wrap">
+       <div class="btn dec ">-</div>
+       <div class="amount-input"><input type="tel" value="1"></div>
+       <div class="btn inc ">+</div>
+       </div>
+
+       </div>
+       <div class="sure-btn">
+        确定
+       </div>
+       <div class="tips">
+        <div class="tips-text">
+           请选择颜色
+        </div>
+    </div>
+    </div>
+    
+    </div>
+   
+   <!-- 评价 -->
+   <script>
+    var opages=document.querySelectorAll(".page");
+        var reviewstitle=document.querySelector(".reviews-title");
+        var oreviewstitle=opages[2].querySelector(".reviews-title");
+        var cc=parseInt(window.localStorage.getItem("aa"));
+
+        console.log(window.localStorage.getItem("aa"))
+        var omore=document.querySelector(".reviews-more");
+        console.log(omore)
+
+
+
+        var xhrb = new XMLHttpRequest();
+        for(var k =1;k<2;k++){
+        xhrb.open('get','http://vueshop.glbuys.com//api/home/reviews/index?gid=' + window.localStorage.getItem("aa") + '&token=1ec949a15fb709370f&page='+k);
+        xhrb.send();
+        xhrb.onreadystatechange=function(){
+            if(this.readyState==4){
+                var  reviews =document.querySelector(".reviews-wrap");
+                var  oreviews = opages[2].querySelector(".reviews-wrap");
+                var ress=JSON.parse(xhrb.response);
+                console.log(ress)
+                // console.log(ress.data.length)
+                if(ress.data.length==4){
+                   omore.style.display="none"
+                   reviewstitle.innerHTML="商品评价(0)"
+                   oreviewstitle.innerHTML="商品评价(0)"
+                   reviews.innerHTML=
+                   `
+                   <span>暂无评价!</span>
+            
+                   `
+                   oreviews.innerHTML=
+                   `
+                   <span>暂无评价!</span>
+            
+                   `
+                }else{
+                for(var i=0;i<ress.data.length;i++){
+            reviews.innerHTML+=
+            `
+            <div class="reviews-list">
+                   <ul>
+                       <li><img src="${ress.data[i].head}" alt=""></li>
+                       <li>${ress.data[i].nickname}</li>
+                   </ul>
+                   <div class="reviews-name">${ress.data[i].content}</div>
+                   <div class="reviews-date">${ress.data[i].times}</div>
+                </div>
+            `}
+          
+
+            for (let j = 0; j < ress.pageinfo.pagenum; j++) {
+                    axios
+                        .get(
+                            "http://vueshop.glbuys.com/api/home/reviews/index?gid=" +
+                                window.localStorage.getItem("aa") +
+                                "&token=1ec949a15fb709370f&page=" +
+                                (j + 1)
+                        )
+                        .then((response) => {
+                            console.log(response.data.data);
+                            var aa=response.data.data
+                            for(var i=0;i<aa.length;i++){
+                                   oreviews.innerHTML+=
+            `
+            <div class="reviews-list">
+                   <ul>
+                       <li><img src="${aa[i].head}" alt=""></li>
+                       <li>${aa[i].nickname}</li>
+                   </ul>
+                   <div class="reviews-name">${aa[i].content}</div>
+                   <div class="reviews-date">${aa[i].times}</div>
+                </div>
+            ` 
+                            }
+                           
+                        });
+                }
+
+
+           
+        
+        reviewstitle.innerHTML="商品评价"+"("+ress.pageinfo.total+")"
+        oreviewstitle.innerHTML="商品评价"+"("+ress.pageinfo.total+")"
+        
+            }
+        }
+    }
+        }
+
+   
+</script>
+   <div class="van-toast van-toast--middle can-toast--text">
+    <div class="can-toast__text">111</div>
+   </div>
+</body>
+</html>

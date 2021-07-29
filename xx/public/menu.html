@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./stylesheets/menu.css">
+    <script src="javascripts/swiper-bundle.min.js"></script>
+    <script src="javascripts/axios.js"></script>
+    <script src="javascripts/better-scroll.js"></script>
+   <!-- <script src="./javascripts/shop.js"></script> -->
+   <script src="./javascripts/template-web.js"></script>
+</head>
+<body>
+     <!-- 列表框 -->
+     <div class="page" id="sort">
+        <div class="search-header">
+            <div class="back"></div>
+            <div class="search1">请输入宝贝名称</div>
+        </div>
+        <div class="goods-main">
+            <div class="classify-wrap-area">
+               <div class="classify-wrap">
+           </div> 
+            </div>
+           
+           <div class="goods-content">
+               <div class="good-content-main">
+                   <!-- <div class="goods-wrap">
+                       <div class="classify-name">
+                           羽绒服
+                       </div>
+                       <div class="goods-items-wrap">
+                           <ul>
+                               <li><img src="./images/1.png" alt=""></li>
+                               <li>11111111</li>
+                           </ul>
+                           <ul>
+                             <li><img src="./images/home/index/banner_1.jpg" alt=""></li>
+                             <li>11111111</li>
+                         </ul>
+                         <ul>
+                             <li><img src="./images/1.png" alt=""></li>
+                             <li>11111111</li>
+                         </ul>
+                         <ul>
+                             <li><img src="./images/1.png" alt=""></li>
+                             <li>11111111</li>
+                         </ul>
+                       </div> -->
+
+                   </div>
+
+               </div>
+
+           </div>
+        
+
+        </div>
+
+    </div>
+    <!-- 左侧导航栏 -->
+    <script id="tpl-class" type="text/html">
+           {{each oclass}}
+            <div class="classify-item  aa">
+             {{$value.title}}
+              </div>
+              {{/each}}
+    </script>
+
+    <script>
+        var aa=document.querySelector(".classify-wrap");
+        axios.get("oclass").then((res)=>{
+         //    console.log(res.data)
+            aa.innerHTML=template("tpl-class",res.data)
+        })
+
+    </script>
+    <!-- 左侧导航栏结束 -->
+    <!-- 右侧数据 -->
+    <script id="tpl-trousers" type="text/html">
+         <!-- 原始方法 -->
+         <%for (let i = 0 ; i < trousers.length;i++) {%>
+         <div class="goods-wrap">
+             <div class="classify-name">
+                <%=trousers[i].title%>
+               </div>
+               <div class="goods-items-wrap">
+                 <%for (let j = 0 ; j < trousers[i].goods.length;j++) {%>
+                 <ul>
+                     <li>
+                         <img src="<%=trousers[i].goods[j].image%>" >
+                     </li>
+                     <li>
+                         <%=trousers[i].goods[j].title%>
+                     </li>
+                    
+                 </ul>
+                 <%}%>
+               </div>    
+         </div>
+         <%}%>
+    </script>
+    <script>
+        var bb=document.querySelector(".goods-content");
+        axios.get("/trousers").then((res)=>{
+            console.log(res.data)
+            bb.innerHTML=template("tpl-trousers",res.data);
+        })
+    </script>
+    <!-- 右侧数据结束 -->
+</body>
+</html>

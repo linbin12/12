@@ -1,0 +1,566 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="./stylesheets/bottom.css">
+    <link rel="stylesheet" href="stylesheets/shop.css">
+    <link rel="stylesheet" href="stylesheets/swiper.min.css">
+    <script src="javascripts/swiper-bundle.min.js"></script>
+    <script src="javascripts/axios.js"></script>
+    <script src="javascripts/better-scroll.js"></script>
+   <script src="./javascripts/shop.js"></script>
+   <script src="./javascripts/template-web.js"></script>
+</head>
+<body>
+<div class="page" >
+   <div class="top-search" >
+       <i></i>
+       <input type="text" value="请输入宝贝名称" class="onsearch">
+       <p>登录</p>
+   </div>
+   <div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="./images/home/index/banner_1.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="./images/home/index/banner_2.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="./images/home/index/banner_3.jpg" alt=""></div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+   </div>
+
+    <div class="nav">
+    </div>
+    <!-- 导航栏 -->
+    <script id="tpl-sportsList" type="text/html">
+        {{each ids}}
+        <div class="nav-shop">
+            <img src="{{$value.image}}" alt="">
+             <p>{{$value.title}}</p>
+        </div>
+        {{/each}}
+    </script>
+    <script>
+     var navs=document.querySelector(".nav")
+     axios.get("/number").then((res)=>{
+         navs.innerHTML=template("tpl-sportsList",res.data)
+     })
+    </script>
+<!-- 导航栏结束 -->
+<!-- 女装 -->
+<div class="women">
+   
+</div>
+  <script id="tpl-shoes" type="text/html">
+        {{each}}
+        <div class="shoes-top">
+        <p>——{{$value[0].title}}——</p>
+    </div>
+    <div class="shoes">
+        <div class="shoes-hot-left shop0" >
+            <h6>{{$value[0].items[0].title}}</h6>
+            <div class="price">
+            <p>精品打折</p>
+            <span>{{$value[0].items[0].price}}元</span>  
+            </div>
+            <p><img src="{{$value[0].items[0].image}}" alt=""></p>
+        </div>
+        <div class="shoes-hot-right" >
+             <div class="shoes-hot-right-top shop0" >
+                 <div class="shoes-hot-right-top-left" >
+                   <span>{{$value[0].items[1].title}}</span>
+               <p>品质糟挑</p>  
+                 </div>
+               <i><img src="{{$value[0].items[1].image}}" alt=""></i>
+             </div>
+             <div class="shoes-hot-right-top shop0" >
+                <div class="shoes-hot-right-top-left" >
+                  <span>{{$value[0].items[2].title}}</span>
+              <p>品质糟挑</p>  
+                </div>
+              <i><img src="{{$value[0].items[2].image}}" alt=""></i>
+            </div>
+        </div>
+    </div> 
+    <div class="shoes-bottom">
+        <ul>
+            <li  class="shop0"><span>{{$value[0].items[3].title}}</span><p><img src="{{$value[0].items[3].image}}" alt=""></p><p>￥{{$value[0].items[3].price}}</p><del>￥576</del></li>
+            <li  class="shop0"><span>{{$value[0].items[4].title}}</span><p><img src="{{$value[0].items[4].image}}" alt=""></p><p>￥{{$value[0].items[4].price}}</p><del>￥560</del></li>
+            <li  class="shop0"><span>{{$value[0].items[5].title}}</span><p><img src="{{$value[0].items[5].image}}" alt=""></p><p>￥{{$value[0].items[5].price}}</p><del>￥600</del></li>
+            <li  class="shop0"><span>{{$value[0].items[6].title}}</span><p><img src="{{$value[0].items[6].image}}" alt=""></p><p>￥{{$value[0].items[6].price}}</p><del>￥400</del></li>
+        </ul>
+       </div> 
+        {{/each}}
+    </script>  
+     <script>
+        var shoes=document.querySelector(".women")
+         axios.get("/shoes").then((res)=>{
+             console.log(res.data.ids[0].items[0].gid)
+             shoes.innerHTML=template("tpl-shoes",res.data)
+             var shopa=document.querySelector(".shoes");
+             console.log(shopa.children[1].children);
+             shopa.children[0].onclick=function(){
+             window.localStorage.setItem("aa",res.data.ids[0].items[0].gid);
+             window.location.href="shopping.html";
+    }
+            shopa.children[1].children[0].onclick=function(){
+                window.localStorage.setItem("aa",res.data.ids[0].items[1].gid);
+             window.location.href="shopping.html";
+            }
+            shopa.children[1].children[1].onclick=function(){
+                window.localStorage.setItem("aa",res.data.ids[0].items[2].gid);
+             window.location.href="shopping.html";
+            }
+            fs();
+            function fs(){
+                var shoesbottom=document.querySelectorAll(".shoes-bottom");
+                console.log(shoesbottom)
+                var lis=shoesbottom[0].querySelector("ul")
+                //女装
+                // console.log(liss.children)
+                for(var i=0;i<lis.children.length;i++){
+                    lis.children[i].index=i;
+                    lis.children[i].onclick=function(){
+                        window.location.href="shopping.html";
+                        console.log(res.data.ids[0].items[this.index+3].gid)
+                        window.localStorage.setItem("aa",res.data.ids[0].items[this.index+3].gid);
+                    }
+                }
+
+            }
+            
+             
+        
+         })
+        </script>
+         <!-- 女装结束 -->
+         <!-- 男装 -->
+         <div class="man">
+            
+        </div>
+        <script id="tpl-man" type="text/html">
+            {{each}}
+            <div class="man-top">
+                <p>——{{$value[1].title}}——</p>
+            </div>
+        <div class="manc">
+            <div  class="man-top-left shop0"  >
+           <h5>{{$value[1].items[0].title}}</h5>
+           <p>火爆开售</p>
+           <span><img src="{{$value[1].items[0].image}}" alt=""></span>
+           </div>
+        <div  class="man-top-left shop0" >
+           <h5>{{$value[1].items[1].title}}</h5>
+           <p>火爆开售</p>
+           <span><img src="{{$value[1].items[1].image}}" alt=""></span>
+        </div>
+       </div>
+        <div class="shoes-bottom">
+            <ul class="kuzi">
+                <li  class="shop0"><span>{{$value[0].items[3].title}}</span><p><img src="{{$value[1].items[2].image}}" alt=""></p><p>￥{{$value[0].items[3].price}}</p><del>￥576</del></li>
+                <li  class="shop0"><span>{{$value[0].items[4].title}}</span><p><img src="{{$value[1].items[3].image}}" alt=""></p><p>￥{{$value[0].items[4].price}}</p><del>￥560</del></li>
+                <li class="shop0"><span>{{$value[0].items[5].title}}</span><p><img src="{{$value[1].items[4].image}}" alt=""></p><p>￥{{$value[0].items[5].price}}</p><del>￥600</del></li>
+                <li class="shop0"><span>{{$value[0].items[6].title}}</span><p><img src="{{$value[1].items[5].image}}" alt=""></p><p>￥{{$value[0].items[6].price}}</p><del>￥400</del></li>
+            </ul>
+           </div> 
+            {{/each}}
+        </script>  
+         <script>
+            var oman=document.querySelector(".man")
+             axios.get("/man").then((res)=>{
+                 console.log(res.data)
+                oman.innerHTML=template("tpl-man",res.data)
+                var s123=document.querySelector(".kuzi");
+                // var ass=s123.children
+                // console.log(s123)
+                 //男装
+                 var omac=document.querySelector(".manc")
+                 console.log(omac.children)
+                 omac.children[0].onclick=function(){
+                    window.location.href="shopping.html";
+                    // console.log(res.data.ids[1])
+                    window.localStorage.setItem("aa",res.data.mans[1].items[0].gid);
+                 }
+                 omac.children[1].onclick=function(){
+                    window.location.href="shopping.html";
+                    window.localStorage.setItem("aa",res.data.mans[1].items[1].gid);
+                 }
+
+                console.log(s123.children)
+                for(var i=0;i<s123.children.length;i++){
+                    s123.children[i].index=i;
+                    s123.children[i].onclick=function(){
+                        window.location.href="shopping.html";
+                        console.log(res.data.mans[1].items[this.index+2].gid)
+                        window.localStorage.setItem("aa",res.data.mans[1].items[this.index+2].gid);
+                    }
+                }
+
+             })
+            </script>
+
+
+        <div class="women computer">
+         
+        </div>
+        <script id="tpl-computer" type="text/html">
+            {{each}}
+            <div class="shoes-top">
+            <p>——{{$value[2].title}}——</p>
+        </div>
+        <div class="shoes  sjds">
+            <div class="shoes-hot-left" class="shop0">
+                <h6>{{$value[2].items[0].title}}</h6>
+                <div class="price">
+                <p>精品打折</p>
+                <span>{{$value[2].items[0].price}}元</span>  
+                </div>
+                <p><img src="{{$value[2].items[0].image}}" alt=""></p>
+            </div>
+            <div class="shoes-hot-right">
+                 <div class="shoes-hot-right-top" class="shop0">
+                     <div class="shoes-hot-right-top-left">
+                       <span>{{$value[2].items[1].title}}</span>
+                   <p>品质糟挑</p>  
+                     </div>
+                   <i><img src="{{$value[2].items[1].image}}" alt=""></i>
+                 </div>
+                 <div class="shoes-hot-right-top" class="shop0">
+                    <div class="shoes-hot-right-top-left">
+                      <span>{{$value[2].items[2].title}}</span>
+                  <p>品质糟挑</p>  
+                    </div>
+                  <i><img src="{{$value[2].items[2].image}}" alt=""></i>
+                </div>
+            </div>
+        </div> 
+        <div class="shoes-bottom">
+            <ul>
+                <li><span>{{$value[0].items[3].title}}</span><p><img src="{{$value[2].items[3].image}}" alt=""></p><p>￥{{$value[2].items[3].price}}</p><del>￥576</del></li>
+                <li><span>{{$value[0].items[4].title}}</span><p><img src="{{$value[2].items[4].image}}" alt=""></p><p>￥{{$value[2].items[4].price}}</p><del>￥560</del></li>
+                <li><span>{{$value[0].items[5].title}}</span><p><img src="{{$value[2].items[5].image}}" alt=""></p><p>￥{{$value[2].items[5].price}}</p><del>￥600</del></li>
+                <li><span>{{$value[0].items[6].title}}</span><p><img src="{{$value[2].items[6].image}}" alt=""></p><p>￥{{$value[2].items[6].price}}</p><del>￥400</del></li>
+            </ul>
+           </div> 
+            {{/each}}
+        </script>  
+         <script>
+            var ocomputer=document.querySelector(".computer")
+             axios.get("/phone").then((res)=>{
+                 console.log(res.data)
+                 ocomputer.innerHTML=template("tpl-computer",res.data)
+                 fnss();
+                 function fnss(){
+                     var shoes=document.querySelector(".sjds");
+                     console.log(shoes.children)
+                     shoes.children[0].onclick=function(){
+                        window.location.href="shopping.html";
+                        window.localStorage.setItem("aa",res.data.phone[2].items[0].gid);
+                     }
+                     shoes.children[1].children[0].onclick=function(){
+                         console.log(1)
+                        window.location.href="shopping.html";
+                        window.localStorage.setItem("aa",res.data.phone[2].items[1].gid);
+                     }
+                     shoes.children[1].children[1].onclick=function(){
+                        window.location.href="shopping.html";
+                        window.localStorage.setItem("aa",res.data.phone[2].items[2].gid);
+                     }
+                    
+                 }
+             })
+            </script>
+         <!-- 推荐 -->
+        <div class="recommend">
+            <div class="oborder"></div>
+        <ul>
+            <li><img src="./images/home/index/recom.png" alt=""></li>
+            <li>为您推荐</li>
+        </ul>
+        </div>
+        <div class="orecommend" >
+        </div>
+        <div class="bottom-nav" >
+            <ul class="bottom-nav-list">
+                <li><a href="#" id="shop"><span></span>首页</a></li>
+                <li><a href="shopcar.html"><span></span>购物车</a></li>
+                <li><a href="my.html"><span></span>我的</a></li>
+            </ul>
+        </div>
+        </div>
+           
+        
+          <script id="tpl-recommend" type="text/html"> 
+            {{each}}  
+           <div class="shop-one clearfix">
+               <i><img src="{{$value[0].image}}" alt=""></i>
+               <p>{{$value[0].title}}</p>
+               <span>￥{{$value[0].price}}</span>
+           </div> 
+           <div class="shop-one clearfix">
+            <i><img src="{{$value[1].image}}" alt=""></i>
+            <p>{{$value[1].title}}</p>
+            <span>￥{{$value[1].price}}</span>
+        </div> 
+            <div class="shop-one clearfix">
+                <i><img src="{{$value[2].image}}" alt=""></i>
+                <p>{{$value[2].title}}</p>
+                <span>￥{{$value[2].price}}</span>
+            </div>
+            <div class="shop-one clearfix">
+             <i><img src="{{$value[3].image}}" alt=""></i>
+             <p>{{$value[3].title}}</p>
+             <span>￥{{$value[3].price}}</span>
+          </div>
+            <div class="shop-one clearfix">
+                <i><img src="{{$value[4].image}}" alt=""></i>
+                <p>{{$value[4].title}}</p>
+                <span>￥{{$value[4].price}}</span>
+            </div>
+            <div class="shop-one clearfix">
+             <i><img src="{{$value[5].image}}" alt=""></i>
+             <p>{{$value[5].title}}</p>
+             <span>￥{{$value[5].price}}</span>
+         </div>
+            <div class="shop-one clearfix">
+                <i><img src="{{$value[6].image}}" alt=""></i>
+                <p>{{$value[6].title}}</p>
+                <span>￥{{$value[6].price}}</span>
+            </div>
+            <div class="shop-one clearfix">
+             <i><img src="{{$value[7].image}}" alt=""></i>
+             <p>{{$value[7].title}}</p>
+             <span>￥{{$value[7].price}}</span>
+          </div>
+            <div class="shop-one clearfix">
+                <i><img src="{{$value[8].image}}" alt=""></i>
+                <p>{{$value[8].title}}</p>
+                <span>￥{{$value[8].price}}</span>
+            </div>
+            <div class="shop-one clearfix">
+             <i><img src="{{$value[9].image}}" alt=""></i>
+             <p>{{$value[9].title}}</p>
+             <span>￥{{$value[9].price}}</span>
+          </div>
+            <div class="shop-one clearfix" id="mar">
+                <i><img src="{{$value[10].image}}" alt=""></i>
+                <p>{{$value[10].title}}</p>
+                <span>￥{{$value[10].price}}</span>
+            </div>
+            <div class="shop-one clearfix" id="mar">
+             <i><img src="{{$value[11].image}}" alt=""></i>
+             <p>{{$value[9].title}}</p>
+             <span>￥{{$value[10].price}}</span>
+         </div>
+            {{/each}}
+        </script> 
+            <!-- 搜索框 -->
+          <div class="search-component" style="display: none;">
+              <div class="search-header">
+                  <div class="close"></div>
+                  <div class="search-wrap">
+                      <div class="search-input-wrap">
+                        <input type="text" placeholder="请输入宝贝名称" class="search">
+                      </div>
+                      <button class="search-btn"></button>
+                  </div>
+              </div>
+              <div class="search-main" style="display: none;">
+                    <div class="search-title-wrap">
+                        <div class="search-title">历史记录</div>
+                        <div class="bin"></div>
+                    </div>
+                    <div class="search-keywords-wrap">
+                        <!-- <div class="keywords">
+                            111
+                        </div> -->
+                    </div>
+              </div>
+              <div class="search-main">
+                <div class="search-title-wrap">
+                    <div class="search-title">最新搜索</div>
+                </div>
+                <div class="search-keywords-wrap">
+                 
+                </div>
+                <div class="van-overlay" style="display: none;">
+                    <div class="clearmess">
+                        <div class="clearmess-title">确认要删除吗?</div>
+                        <div class="clearmess-bottom">
+                            <div class="clearmess-left">取消</div>
+                            <div class="clearmess-right">确定</div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+          </div>
+
+
+          </div>
+           <!-- 搜索框结束 -->
+           <!-- 列表框 -->
+           <div class="page" id="sort" style="display: none;">
+               <div class="search-header">
+                   <div class="back"></div>
+                   <div class="search1">请输入宝贝名称</div>
+               </div>
+               <div class="goods-main">
+                   <div class="classify-wrap-area">
+                       <!-- 滚动div  -->
+                      
+                       <div class="classify-wrap">
+                        
+                        <!-- 左侧内容 --> 
+                       </div>
+                  
+                </div>
+                  
+                  <div class="goods-content">
+                      <div class="good-content-main">
+                          <!-- <div class="goods-wrap">
+                              <div class="classify-name">
+                                  羽绒服
+                              </div>
+                              <div class="goods-items-wrap">
+                                  <ul>
+                                      <li><img src="./images/1.png" alt=""></li>
+                                      <li>11111111</li>
+                                  </ul>
+                                  <ul>
+                                    <li><img src="./images/home/index/banner_1.jpg" alt=""></li>
+                                    <li>11111111</li>
+                                </ul>
+                                <ul>
+                                    <li><img src="./images/1.png" alt=""></li>
+                                    <li>11111111</li>
+                                </ul>
+                                <ul>
+                                    <li><img src="./images/1.png" alt=""></li>
+                                    <li>11111111</li>
+                                </ul>
+                              </div> -->
+
+                          </div>
+
+                      </div>
+
+                  </div>
+               
+
+               </div>
+
+           </div>
+           <!-- 左侧导航栏 -->
+           <!-- <script id="tpl-class" type="text/html">
+                  {{each oclass}}
+                   <div class="classify-item  aa">
+                    {{$value.title}}
+                     </div>
+                     {{/each}}
+           </script>
+    
+           <script>
+               var aa=document.querySelector(".classify-wrap");
+               axios.get("oclass").then((res)=>{
+                //    console.log(res.data)
+                   aa.innerHTML=template("tpl-class",res.data)
+               })
+
+           </script> -->
+           <!-- 左侧导航栏结束 -->
+           <!-- 右侧数据 -->
+           <!-- <script id="tpl-trousers" type="text/html">
+                <%for (let i = 0 ; i < trousers.length;i++) {%>
+                <div class="goods-wrap">
+                    <div class="classify-name">
+                       <%=trousers[i].title%>
+                      </div>
+                      <div class="goods-items-wrap">
+                        <%for (let j = 0 ; j < trousers[i].goods.length;j++) {%>
+                        <ul>
+                            <li>
+                                <img src="<%=trousers[i].goods[j].image%>" >
+                            </li>
+                            <li>
+                                <%=trousers[i].goods[j].title%>
+                            </li>
+                           
+                        </ul>
+                        <%}%>
+                      </div>    
+                </div>
+                <%}%>
+           </script> -->
+           <!-- <script>
+               var bb=document.querySelector(".goods-content");
+               axios.get("/trousers").then((res)=>{
+                   console.log(res.data)
+                   bb.innerHTML=template("tpl-trousers",res.data);
+               })
+           </script> -->
+           <!-- 右侧数据结束 -->
+           
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</div>
+   <!-- 轮播图 -->
+ <script>
+     var mySwiper = new Swiper ('.swiper-container', {
+    //   direction: 'vertical', // 垂直切换选项
+      loop: true, // 循环模式选项
+      autoplay:true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+    })  
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+</body>
+</html>
